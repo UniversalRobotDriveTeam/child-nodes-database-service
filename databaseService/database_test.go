@@ -1,7 +1,7 @@
 package databaseService_test
 
 import (
-	"github.com/UniversalRobotDriveTeam/child-nodes-basic/robotBasicAPI/databaseService"
+	"github.com/UniversalRobotDriveTeam/child-nodes-database-service/databaseService"
 	"testing"
 )
 
