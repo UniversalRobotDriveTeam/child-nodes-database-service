@@ -35,7 +35,7 @@ func (db *DatabaseAPP) UpdateData(tableName string, data interface{}) error {
 // GetData 获取数据
 // 传入：表单名称，数据(传递指针)
 // 传出：错误消息
-func (db *DatabaseAPP) GetData(tableName string, data interface{}) error {
-	err := db.db.Table(tableName).Find(data).Error
+func (db *DatabaseAPP) GetData(tableName string, data interface{}, conds interface{}) error {
+	err := db.db.Table(tableName).Find(data, conds).Error
 	return err
 }
