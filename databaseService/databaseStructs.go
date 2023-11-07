@@ -38,16 +38,6 @@ type DatabaseAPI interface {
 	// TODO
 }
 
-// DatabaseMessageChannel 数据库消息通道
-type DatabaseMessageChannel struct {
-	// 数据库表地址
-	databaseTable string
-	// 写入数据库数据通道
-	WriteMessageChannel chan DatabaseMessage
-	// 从数据库读到数据通道
-	ReadMessageChannel chan DatabaseMessage
-}
-
 // DatabaseMessage 数据库写入对象
 type DatabaseMessage struct {
 	// 数据项目ID
