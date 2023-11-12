@@ -3,7 +3,6 @@ module github.com/UniversalRobotDriveTeam/child-nodes-database-service
 go 1.21.1
 
 require (
-	github.com/UniversalRobotDriveTeam/child-nodes-basic v1.0.0
 	gorm.io/driver/sqlite v1.5.4
 	gorm.io/gorm v1.25.5
 )
