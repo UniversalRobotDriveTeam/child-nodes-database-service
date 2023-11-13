@@ -1,4 +1,4 @@
-package databaseService
+package database
 
 import (
 	"gorm.io/gorm"
@@ -26,16 +26,6 @@ type databaseConfig struct {
 	databaseUserPassword string
 	// TODO
 
-}
-
-// Database 数据库暴露出来的读接口
-type Database interface {
-	ReadItem(item string)
-}
-
-// DatabaseAPI 控制数据库的接口
-type DatabaseAPI interface {
-	// TODO
 }
 
 // DatabaseMessage 数据库写入对象

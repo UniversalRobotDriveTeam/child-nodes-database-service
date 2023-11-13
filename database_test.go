@@ -1,12 +1,13 @@
-package databaseService_test
+package database_test
 
 import (
-	"github.com/UniversalRobotDriveTeam/child-nodes-database-service/databaseService"
 	"testing"
+
+	database "github.com/UniversalRobotDriveTeam/child-nodes-database-service"
 )
 
 func TestCreate(t *testing.T) {
-	db, err := databaseService.InitSQLiteDatabase("test.db", "")
+	db, err := database.InitSQLiteDatabase("test.db", "")
 	if err != nil {
 		t.Error(err)
 		return
@@ -26,7 +27,7 @@ func TestCreate(t *testing.T) {
 }
 
 func TestDatabaseAPI(t *testing.T) {
-	db, err := databaseService.InitSQLiteDatabase("test.db", "")
+	db, err := database.InitSQLiteDatabase("test.db", "")
 	if err != nil {
 		t.Error(err)
 		return

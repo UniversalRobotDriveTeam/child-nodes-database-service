@@ -3,13 +3,13 @@ module github.com/UniversalRobotDriveTeam/child-nodes-database-service
 go 1.21.1
 
 require (
-	github.com/UniversalRobotDriveTeam/child-nodes-basic v1.0.0
-	gorm.io/driver/sqlite v1.5.4
+	github.com/UniversalRobotDriveTeam/child-nodes-assist v1.0.5
 	gorm.io/gorm v1.25.5
 )
 
 require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/mattn/go-sqlite3 v1.14.17 // indirect
+	github.com/mattn/go-sqlite3 v1.14.18 // indirect
+	gorm.io/driver/sqlite v1.5.4 // indirect
 )
