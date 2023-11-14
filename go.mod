@@ -1,4 +1,4 @@
-module github.com/UniversalRobotDriveTeam/child-nodes-database-service
+module github.com/238Studio/child-nodes-database-service
 
 go 1.21.1
 
