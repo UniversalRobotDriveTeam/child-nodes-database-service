@@ -3,7 +3,7 @@ package database_test
 import (
 	"testing"
 
-	database "github.com/UniversalRobotDriveTeam/child-nodes-database-service"
+	database "github.com/238Studio/child-nodes-database-service"
 )
 
 func TestCreate(t *testing.T) {
