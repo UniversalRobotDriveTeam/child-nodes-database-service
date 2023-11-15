@@ -3,7 +3,7 @@ module github.com/238Studio/child-nodes-database-service
 go 1.21.1
 
 require (
-	github.com/238Studio/child-nodes-assist v1.0.6
+	github.com/238Studio/child-nodes-assist v1.0.7
 	gorm.io/driver/sqlite v1.5.4
 	gorm.io/gorm v1.25.5
 )
