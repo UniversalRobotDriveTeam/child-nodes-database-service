@@ -7,24 +7,31 @@
 ### func InitSQLiteDatabase(dataBaseName, dataBaseURL string) (*DatabaseAPP, error)
 创造一个SQLite数据库APP。传入数据库的名称和地址（考虑到远程调用的可能性）。返回数据库APP与封装好的错误消息。
 
+---
 ### func (db *DatabaseAPP) CreateTable(tableName string, table interface{}) error
 创建一个表。传入表的名称和表的结构体指针。返回封装好的错误消息。
 
+---
 ### func (db *DatabaseAPP) AddData(tableName string, data interface{}) error
 向表中添加数据。传入表的名称和数据结构体指针。返回封装好的错误消息。
 
+---
 ### func (db *DatabaseAPP) DeleteData(tableName string, data interface{}) error
 从表中删除数据。传入表的名称和数据结构体指针。返回封装好的错误消息。
 
+---
 ### func (db *DatabaseAPP) UpdateData(tableName string, data interface{}) error
 更新表中的数据。传入表的名称和数据结构体指针。返回封装好的错误消息。
 
+---
 ### func (db *DatabaseAPP) DeleteData(tableName string, data interface{}) error
 从表中删除数据。传入表的名称和数据结构体指针。返回封装好的错误消息。
 
+---
 ### func (db *DatabaseAPP) GetData(tableName string, data interface{}) error
 从表中获取首个数据。传入表的名称和数据结构体指针。返回封装好的错误消息。
 
+---
 ### func (db *DatabaseAPP) GetDatas(tableName string, conditions map[string]interface{}, data interface{}) error
 从表中获取多个数据。传入表的名称、条件和数据结构体指针。返回封装好的错误消息。
 
@@ -42,6 +49,7 @@ db.GetDatas("users",conditions,&user)
 
 即在`users`表中查找`user_name`为`test`且`age`为`20`的数据。
 
+---
 ### func (db *DatabaseAPP) GetComplexConditionsDatas(tableName string, conditions []ComplexCondition, data interface{}) error
 当条件复杂(如包含大于、小于等条件时),使用此函数(否则推荐使用`GetData`或`GetDatas`)。传入表的名称、条件和数据结构体指针。返回封装好的错误消息。
 
@@ -61,6 +69,7 @@ db.GetComplexConditionsDatas("users",conditions,&user)
 
 即在`users`表中查找`user_name`为`test`且`age`大于`20`的数据。
 
+---
 ### func (db *DatabaseAPP) GenerateComplexConditions(conditions map[string]interface{}) []ComplexCondition
 生成复杂条件。传入条件(`conditions`)，返回`[]ComplexCondition`结构。
 
