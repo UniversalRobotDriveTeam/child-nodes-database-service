@@ -7,6 +7,9 @@ import (
 	"github.com/238Studio/child-nodes-assist/util"
 )
 
+// GenerateComplexConditions 生成复杂条件结构
+// 传入:条件键值对
+// 传出:条件结构和错误信息
 func GenerateComplexConditions(conditions map[string]interface{}) ([]ComplexCondition, error) {
 	//捕获panic
 	defer func() {
@@ -19,6 +22,7 @@ func GenerateComplexConditions(conditions map[string]interface{}) ([]ComplexCond
 
 	var complexConditions []ComplexCondition
 
+	//遍历map，构造条件结构体
 	for sqlString, condition := range conditions {
 		complexCondition := ComplexCondition{
 			SqlString: sqlString,
