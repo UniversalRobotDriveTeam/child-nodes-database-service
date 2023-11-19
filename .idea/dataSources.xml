@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="identifier.sqlite" uuid="303a29f5-dd1b-49e9-b5fc-5a7335a7b89e">
+    <data-source source="LOCAL" name="test [2]" uuid="5cf1e211-2b91-4243-afb2-3e3898fc03dc">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:identifier.sqlite</jdbc-url>
-      <jdbc-additional-properties>
-        <property name="EXTERNAL_DATA_PATH" value="D:\workspace\project\github\child-nodes-database-service\external-data.xml" />
-      </jdbc-additional-properties>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="test" uuid="ff761358-a21b-41e2-9f7e-f5cdf1e45a3a">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\workspace\project\github\child-nodes-database-service\test.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:D:\workspace\project\238Studio\child-nodes-database-service\test.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>
