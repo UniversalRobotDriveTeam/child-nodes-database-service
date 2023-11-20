@@ -1,8 +1,8 @@
 package database
 
 import (
-	_const "github.com/UniversalRobotDriveTeam/child-nodes-assist/const"
-	"github.com/UniversalRobotDriveTeam/child-nodes-assist/util"
+	_const "github.com/238Studio/child-nodes-assist/const"
+	"github.com/238Studio/child-nodes-assist/util"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )

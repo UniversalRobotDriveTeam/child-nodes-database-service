@@ -1,8 +1,8 @@
 package database
 
 import (
-	_const "github.com/UniversalRobotDriveTeam/child-nodes-assist/const"
-	"github.com/UniversalRobotDriveTeam/child-nodes-assist/util"
+	_const "github.com/238Studio/child-nodes-assist/const"
+	"github.com/238Studio/child-nodes-assist/util"
 	"gorm.io/gorm"
 )
 
@@ -50,7 +50,7 @@ func (db *DatabaseAPP) UpdateData(tableName string, data interface{}) error {
 	return nil
 }
 
-// GetData 获取一个表单全部数据
+// GetData 获取一个表单约束字段的首个数据
 // 传入：表单名称，数据(传递指针)
 // 传出：错误消息
 func (db *DatabaseAPP) GetData(tableName string, data interface{}) error {
@@ -61,10 +61,39 @@ func (db *DatabaseAPP) GetData(tableName string, data interface{}) error {
 	return nil
 }
 
+// GetDatas 获取一个表单约束字段的所有数据
+// 传入：表单名称，复合条件，数据(传递指针)
+// 传出：错误消息
+func (db *DatabaseAPP) GetDatas(tableName string, conditions map[string]interface{}, data interface{}) error {
+	err := db.db.Table(tableName).Where(conditions).Find(data).Error
+	if err != nil {
+		return util.NewError(_const.CommonException, _const.Database, err)
+	}
+	return nil
+}
+
+// GetComplexConditionsDatas 获取一个表单复杂约束字段的所有数据
+// 传入：表单名称，复合条件，数据(传递指针)
+// 传出：错误消息
+func (db *DatabaseAPP) GetComplexConditionsDatas(tableName string, conditions []ComplexCondition, data interface{}) error {
+	table := db.db.Table(tableName)
+	//迭代添加约束条件
+	for _, condition := range conditions {
+		table = table.Where(condition.SqlString, condition.Condition)
+	}
+
+	//迭代结束，开始查询操作
+	err := table.Find(data).Error
+	if err != nil {
+		return util.NewError(_const.CommonException, _const.Database, err)
+	}
+	return nil
+}
+
 // GetDatabase 获取数据库 进行复杂SQL操作
 // 传入：无
 // 传出：数据库
-// FIXME:这么做是否合适我先蒙古。
+// FIXME:调用之前需要告知其他开发者。注意。非必要（且不能通过新增接口组合实现）勿用。
 func (db *DatabaseAPP) GetDatabase() *gorm.DB {
 	return db.db
 }

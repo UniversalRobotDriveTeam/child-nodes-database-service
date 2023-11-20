@@ -24,18 +24,10 @@ type databaseConfig struct {
 	databaseUserName string
 	// 数据库用户密码
 	databaseUserPassword string
-	// TODO
-
 }
 
-// DatabaseMessage 数据库写入对象
-type DatabaseMessage struct {
-	// 数据项目ID
-	id string
-	// 数据项目主键
-	key string
-	// 数据
-	strData   map[string]string
-	intData   map[string]int64
-	floatData map[string]float64
+// ComplexCondition 复杂数据查询约束条件
+type ComplexCondition struct {
+	SqlString string
+	Condition interface{}
 }
