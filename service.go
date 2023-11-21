@@ -1,6 +1,8 @@
 package database
 
 import (
+	"errors"
+
 	_const "github.com/238Studio/child-nodes-assist/const"
 	"github.com/238Studio/child-nodes-assist/util"
 	"gorm.io/gorm"
@@ -9,8 +11,16 @@ import (
 // CreateTable 创建表单
 // 传入：表单名称，表单结构体
 // 传出：错误消息
-func (db *DatabaseAPP) CreateTable(tableName string, table interface{}) error {
-	err := db.db.Table(tableName).AutoMigrate(table)
+func (db *DatabaseAPP) CreateTable(tableName string, table interface{}) (err error) {
+	defer func() {
+		if er := recover(); er != nil {
+			//panic错误，定级为fatal
+			//返回值赋值
+			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+		}
+	}()
+
+	err = db.db.Table(tableName).AutoMigrate(table)
 	if err != nil {
 		return util.NewError(_const.CommonException, _const.Database, err)
 	}
@@ -20,8 +30,16 @@ func (db *DatabaseAPP) CreateTable(tableName string, table interface{}) error {
 // AddData 添加数据
 // 传入：表单名称，数据(传递指针)
 // 传出：错误消息
-func (db *DatabaseAPP) AddData(tableName string, data interface{}) error {
-	err := db.db.Table(tableName).Create(data).Error
+func (db *DatabaseAPP) AddData(tableName string, data interface{}) (err error) {
+	defer func() {
+		if er := recover(); er != nil {
+			//panic错误，定级为fatal
+			//返回值赋值
+			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+		}
+	}()
+
+	err = db.db.Table(tableName).Create(data).Error
 	if err != nil {
 		return util.NewError(_const.CommonException, _const.Database, err)
 	}
@@ -31,8 +49,16 @@ func (db *DatabaseAPP) AddData(tableName string, data interface{}) error {
 // DeleteData 删除数据
 // 传入：表单名称，数据(传递指针)
 // 传出：错误消息
-func (db *DatabaseAPP) DeleteData(tableName string, data interface{}) error {
-	err := db.db.Table(tableName).Delete(data).Error
+func (db *DatabaseAPP) DeleteData(tableName string, data interface{}) (err error) {
+	defer func() {
+		if er := recover(); er != nil {
+			//panic错误，定级为fatal
+			//返回值赋值
+			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+		}
+	}()
+
+	err = db.db.Table(tableName).Delete(data).Error
 	if err != nil {
 		return util.NewError(_const.CommonException, _const.Database, err)
 	}
@@ -42,8 +68,16 @@ func (db *DatabaseAPP) DeleteData(tableName string, data interface{}) error {
 // UpdateData 更新数据
 // 传入：表单名称，数据(传递指针)
 // 传出：错误消息
-func (db *DatabaseAPP) UpdateData(tableName string, data interface{}) error {
-	err := db.db.Table(tableName).Save(data).Error
+func (db *DatabaseAPP) UpdateData(tableName string, data interface{}) (err error) {
+	defer func() {
+		if er := recover(); er != nil {
+			//panic错误，定级为fatal
+			//返回值赋值
+			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+		}
+	}()
+
+	err = db.db.Table(tableName).Save(data).Error
 	if err != nil {
 		return util.NewError(_const.CommonException, _const.Database, err)
 	}
@@ -53,8 +87,16 @@ func (db *DatabaseAPP) UpdateData(tableName string, data interface{}) error {
 // GetData 获取一个表单约束字段的首个数据
 // 传入：表单名称，数据(传递指针)
 // 传出：错误消息
-func (db *DatabaseAPP) GetData(tableName string, data interface{}) error {
-	err := db.db.Table(tableName).Find(data).Error
+func (db *DatabaseAPP) GetData(tableName string, data interface{}) (err error) {
+	defer func() {
+		if er := recover(); er != nil {
+			//panic错误，定级为fatal
+			//返回值赋值
+			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+		}
+	}()
+
+	err = db.db.Table(tableName).Find(data).Error
 	if err != nil {
 		return util.NewError(_const.CommonException, _const.Database, err)
 	}
@@ -64,8 +106,16 @@ func (db *DatabaseAPP) GetData(tableName string, data interface{}) error {
 // GetDatas 获取一个表单约束字段的所有数据
 // 传入：表单名称，复合条件，数据(传递指针)
 // 传出：错误消息
-func (db *DatabaseAPP) GetDatas(tableName string, conditions map[string]interface{}, data interface{}) error {
-	err := db.db.Table(tableName).Where(conditions).Find(data).Error
+func (db *DatabaseAPP) GetDatas(tableName string, conditions map[string]interface{}, data interface{}) (err error) {
+	defer func() {
+		if er := recover(); er != nil {
+			//panic错误，定级为fatal
+			//返回值赋值
+			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+		}
+	}()
+
+	err = db.db.Table(tableName).Where(conditions).Find(data).Error
 	if err != nil {
 		return util.NewError(_const.CommonException, _const.Database, err)
 	}
@@ -75,7 +125,15 @@ func (db *DatabaseAPP) GetDatas(tableName string, conditions map[string]interfac
 // GetComplexConditionsDatas 获取一个表单复杂约束字段的所有数据
 // 传入：表单名称，复合条件，数据(传递指针)
 // 传出：错误消息
-func (db *DatabaseAPP) GetComplexConditionsDatas(tableName string, conditions []ComplexCondition, data interface{}) error {
+func (db *DatabaseAPP) GetComplexConditionsDatas(tableName string, conditions []ComplexCondition, data interface{}) (err error) {
+	defer func() {
+		if er := recover(); er != nil {
+			//panic错误，定级为fatal
+			//返回值赋值
+			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+		}
+	}()
+
 	table := db.db.Table(tableName)
 	//迭代添加约束条件
 	for _, condition := range conditions {
@@ -83,7 +141,7 @@ func (db *DatabaseAPP) GetComplexConditionsDatas(tableName string, conditions []
 	}
 
 	//迭代结束，开始查询操作
-	err := table.Find(data).Error
+	err = table.Find(data).Error
 	if err != nil {
 		return util.NewError(_const.CommonException, _const.Database, err)
 	}
