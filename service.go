@@ -3,8 +3,8 @@ package database
 import (
 	"errors"
 
-	_const "github.com/238Studio/child-nodes-assist/const"
-	"github.com/238Studio/child-nodes-assist/util"
+	"github.com/238Studio/child-nodes-error-manager/errpack"
+
 	"gorm.io/gorm"
 )
 
@@ -16,13 +16,13 @@ func (db *DatabaseAPP) CreateTable(tableName string, table interface{}) (err err
 		if er := recover(); er != nil {
 			//panic错误，定级为fatal
 			//返回值赋值
-			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+			err = errpack.NewError(errpack.FatalException, errpack.Network, errors.New(er.(string)))
 		}
 	}()
 
 	err = db.db.Table(tableName).AutoMigrate(table)
 	if err != nil {
-		return util.NewError(_const.CommonException, _const.Database, err)
+		return errpack.NewError(errpack.CommonException, errpack.Database, err)
 	}
 	return nil
 }
@@ -35,13 +35,13 @@ func (db *DatabaseAPP) AddData(tableName string, data interface{}) (err error) {
 		if er := recover(); er != nil {
 			//panic错误，定级为fatal
 			//返回值赋值
-			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+			err = errpack.NewError(errpack.FatalException, errpack.Network, errors.New(er.(string)))
 		}
 	}()
 
 	err = db.db.Table(tableName).Create(data).Error
 	if err != nil {
-		return util.NewError(_const.CommonException, _const.Database, err)
+		return errpack.NewError(errpack.CommonException, errpack.Database, err)
 	}
 	return nil
 }
@@ -54,13 +54,13 @@ func (db *DatabaseAPP) DeleteData(tableName string, data interface{}) (err error
 		if er := recover(); er != nil {
 			//panic错误，定级为fatal
 			//返回值赋值
-			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+			err = errpack.NewError(errpack.FatalException, errpack.Network, errors.New(er.(string)))
 		}
 	}()
 
 	err = db.db.Table(tableName).Delete(data).Error
 	if err != nil {
-		return util.NewError(_const.CommonException, _const.Database, err)
+		return errpack.NewError(errpack.CommonException, errpack.Database, err)
 	}
 	return nil
 }
@@ -73,13 +73,13 @@ func (db *DatabaseAPP) UpdateData(tableName string, data interface{}) (err error
 		if er := recover(); er != nil {
 			//panic错误，定级为fatal
 			//返回值赋值
-			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+			err = errpack.NewError(errpack.FatalException, errpack.Network, errors.New(er.(string)))
 		}
 	}()
 
 	err = db.db.Table(tableName).Save(data).Error
 	if err != nil {
-		return util.NewError(_const.CommonException, _const.Database, err)
+		return errpack.NewError(errpack.CommonException, errpack.Database, err)
 	}
 	return nil
 }
@@ -92,13 +92,13 @@ func (db *DatabaseAPP) GetData(tableName string, data interface{}) (err error) {
 		if er := recover(); er != nil {
 			//panic错误，定级为fatal
 			//返回值赋值
-			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+			err = errpack.NewError(errpack.FatalException, errpack.Network, errors.New(er.(string)))
 		}
 	}()
 
 	err = db.db.Table(tableName).Find(data).Error
 	if err != nil {
-		return util.NewError(_const.CommonException, _const.Database, err)
+		return errpack.NewError(errpack.CommonException, errpack.Database, err)
 	}
 	return nil
 }
@@ -111,13 +111,13 @@ func (db *DatabaseAPP) GetDatas(tableName string, conditions map[string]interfac
 		if er := recover(); er != nil {
 			//panic错误，定级为fatal
 			//返回值赋值
-			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+			err = errpack.NewError(errpack.FatalException, errpack.Network, errors.New(er.(string)))
 		}
 	}()
 
 	err = db.db.Table(tableName).Where(conditions).Find(data).Error
 	if err != nil {
-		return util.NewError(_const.CommonException, _const.Database, err)
+		return errpack.NewError(errpack.CommonException, errpack.Database, err)
 	}
 	return nil
 }
@@ -130,7 +130,7 @@ func (db *DatabaseAPP) GetComplexConditionsDatas(tableName string, conditions []
 		if er := recover(); er != nil {
 			//panic错误，定级为fatal
 			//返回值赋值
-			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+			err = errpack.NewError(errpack.FatalException, errpack.Network, errors.New(er.(string)))
 		}
 	}()
 
@@ -143,7 +143,7 @@ func (db *DatabaseAPP) GetComplexConditionsDatas(tableName string, conditions []
 	//迭代结束，开始查询操作
 	err = table.Find(data).Error
 	if err != nil {
-		return util.NewError(_const.CommonException, _const.Database, err)
+		return errpack.NewError(errpack.CommonException, errpack.Database, err)
 	}
 	return nil
 }

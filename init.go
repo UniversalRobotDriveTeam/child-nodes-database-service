@@ -1,8 +1,7 @@
 package database
 
 import (
-	_const "github.com/238Studio/child-nodes-assist/const"
-	"github.com/238Studio/child-nodes-assist/util"
+	"github.com/238Studio/child-nodes-error-manager/errpack"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -20,7 +19,7 @@ func InitSQLiteDatabase(dataBaseName, dataBaseURL string) (*DatabaseAPP, error) 
 	})
 	if err != nil {
 		//数据库初始化异常，界定为严重错误
-		return nil, util.NewError(_const.FatalException, _const.Database, err)
+		return nil, errpack.NewError(errpack.FatalException, errpack.Database, err)
 	}
 	databaseApp.db = db
 
