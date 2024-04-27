@@ -50,29 +50,22 @@ db.GetDatas("users",conditions,&user)
 即在`users`表中查找`user_name`为`test`且`age`为`20`的数据。
 
 ---
-### func (db *DatabaseAPP) GetComplexConditionsDatas(tableName string, conditions []ComplexCondition, data interface{}) error
-当条件复杂(如包含大于、小于等条件时),使用此函数(否则推荐使用`GetData`或`GetDatas`)。传入表的名称、条件和数据结构体指针。返回封装好的错误消息。
 
-条件结构说明：
-
-- 条件(`conditions`)为一个`[]ComplexCondition`结构。其中，`ComplexCondition`为一个结构体，包含`SqlString`和`Condition`两个字段。`SqlString`为SQL语句，`Condition`为SQL语句中的条件。
-- 生成条件，推荐调用`GenerateComplexConditions`函数。
-- 例如，假设进行以下操作：
-```go
-condition:=make(map[string]interface{})
-condition["user_name = ?"]="test"
-condition["age > ?"]=20
-condtions,err:=db.GenerateComplexConditions(condition)
-db.GetComplexConditionsDatas("users",conditions,&user)
-```
-等价为：`SELECT * FROM users WHERE user_name = "test" AND age > 20;`
-
-即在`users`表中查找`user_name`为`test`且`age`大于`20`的数据。
+### func (db *DatabaseAPP) GetQueryBody(tableName string) QueryBody
+获取查询体。传入表的名称。返回查询体。
 
 ---
-### func (db *DatabaseAPP) GenerateComplexConditions(conditions map[string]interface{}) []ComplexCondition
-生成复杂条件。传入条件(`conditions`)，返回`[]ComplexCondition`结构。
+### func (queryBody *QueryBody) And(sqlString string, condition interface{})
+添加AND条件。传入SQL语句和条件。更新查询体查询信息。
 
-传入结构说明：
+---
+### func (queryBody *QueryBody) Or(sqlString string, condition interface{})
+添加OR条件。传入SQL语句和条件。更新查询体查询信息。
 
-- 条件(`conditions`)为一个`map[string]interface{}`结构。其中，`string`为SQL语句(例如:`age > 20`或`user_name = test`),而`interface{}`则是映射条件。
+---
+### func (queryBody *QueryBody) Not(sqlString string, condition interface{})
+添加NOT条件。传入SQL语句和条件。更新查询体查询信息。
+
+---
+### func (queryBody *QueryBody) GetComplexConditionsDatas(data interface{}) (err error)
+执行复杂条件查询。传入数据结构体指针。返回封装好的错误消息。
