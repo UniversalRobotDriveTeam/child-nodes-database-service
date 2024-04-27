@@ -136,32 +136,30 @@ func TestGetComplexData(t *testing.T) {
 		Id       int
 		Age      int
 	}
-
 	tests := make([]test, 0)
-	conditions := make(map[string]interface{})
-	conditions["age > ?"] = 20
-	conditions["age < ?"] = 30
-	cds, err := database.GenerateComplexConditions(conditions)
-	if err != nil {
-		t.Fatal(err)
-	}
 
-	err = db.GetComplexConditionsDatas("test", cds, &tests)
+	cds := db.GetQueryBody("test")
+	cds.And("age > ?", 20)
+	cds.And("age < ?", 30)
+	err = cds.GetComplexConditionsDatas(&tests)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(tests)
 
-	conditions["user_name = ?"] = "testtest"
-	cds, err = database.GenerateComplexConditions(conditions)
+	tests = make([]test, 0)
+	cds.Or("user_name = ?", "testtest")
+	err = cds.GetComplexConditionsDatas(&tests)
 	if err != nil {
 		t.Fatal(err)
 	}
+	t.Log(tests)
 
-	err = db.GetComplexConditionsDatas("test", cds, &tests)
+	tests = make([]test, 0)
+	cds.Not("age = ?", 45)
+	err = cds.GetComplexConditionsDatas(&tests)
 	if err != nil {
 		t.Fatal(err)
 	}
-
 	t.Log(tests)
 }

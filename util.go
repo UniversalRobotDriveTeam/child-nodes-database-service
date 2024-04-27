@@ -1,33 +1,31 @@
 package database
 
-import (
-	"errors"
-
-	"github.com/238Studio/child-nodes-error-manager/errpack"
-)
-
-// GenerateComplexConditions 生成复杂条件结构
-// 传入:条件键值对
-// 传出:条件结构和错误信息
-func GenerateComplexConditions(conditions map[string]interface{}) (complexConditions []ComplexCondition, err error) {
-	//捕获panic
-	defer func() {
-		if er := recover(); er != nil {
-			//panic错误，定级为fatal
-			//返回值赋值
-			err = errpack.NewError(errpack.FatalException, errpack.Network, errors.New(er.(string)))
-			complexConditions = nil
-		}
-	}()
-
-	//遍历map，构造条件结构体
-	for sqlString, condition := range conditions {
-		complexCondition := ComplexCondition{
-			SqlString: sqlString,
-			Condition: condition,
-		}
-		complexConditions = append(complexConditions, complexCondition)
+// GetQueryBody 生成查询体
+// 传入:表单名称
+// 传出:查询体
+func (db *DatabaseAPP) GetQueryBody(tableName string) QueryBody {
+	return QueryBody{
+		db.db.Table(tableName),
 	}
+}
 
-	return complexConditions, nil
+// And 添加AND连接条件
+// 传入:无
+// 返回:无
+func (queryBody *QueryBody) And(sqlString string, condition interface{}) {
+	queryBody.table = queryBody.table.Where(sqlString, condition)
+}
+
+// Or 添加OR连接条件
+// 传入:无
+// 传出:无
+func (queryBody *QueryBody) Or(sqlString string, condition interface{}) {
+	queryBody.table = queryBody.table.Or(sqlString, condition)
+}
+
+// Not 添加NOT连接条件
+// 传入:无
+// 传出:无
+func (queryBody *QueryBody) Not(sqlString string, condition interface{}) {
+	queryBody.table = queryBody.table.Not(sqlString, condition)
 }

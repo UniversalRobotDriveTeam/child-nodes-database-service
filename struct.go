@@ -28,6 +28,11 @@ type databaseConfig struct {
 
 // ComplexCondition 复杂数据查询约束条件
 type ComplexCondition struct {
-	SqlString string
-	Condition interface{}
+	SqlString string      //SQL语句
+	Condition interface{} //条件
+	operators int         //逻辑运算符
+}
+
+type QueryBody struct {
+	table *gorm.DB
 }

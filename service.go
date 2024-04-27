@@ -125,7 +125,7 @@ func (db *DatabaseAPP) GetDatas(tableName string, conditions map[string]interfac
 // GetComplexConditionsDatas 获取一个表单复杂约束字段的所有数据
 // 传入：表单名称，复合条件，数据(传递指针)
 // 传出：错误消息
-func (db *DatabaseAPP) GetComplexConditionsDatas(tableName string, conditions []ComplexCondition, data interface{}) (err error) {
+func (queryBody *QueryBody) GetComplexConditionsDatas(data interface{}) (err error) {
 	defer func() {
 		if er := recover(); er != nil {
 			//panic错误，定级为fatal
@@ -134,14 +134,7 @@ func (db *DatabaseAPP) GetComplexConditionsDatas(tableName string, conditions []
 		}
 	}()
 
-	table := db.db.Table(tableName)
-	//迭代添加约束条件
-	for _, condition := range conditions {
-		table = table.Where(condition.SqlString, condition.Condition)
-	}
-
-	//迭代结束，开始查询操作
-	err = table.Find(data).Error
+	err = queryBody.table.Find(data).Error
 	if err != nil {
 		return errpack.NewError(errpack.CommonException, errpack.Database, err)
 	}
